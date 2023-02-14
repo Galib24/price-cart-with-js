@@ -6,20 +6,22 @@ function updateCaseNumber(isIncrease) {
     const caseNumberField = document.getElementById('case-number-field');
     const caseNumberString = caseNumberField.value;
     const previousCaseNumber = parseInt(caseNumberString);
-   
+
     let newCaseNumber;
-    if(isIncrease === true){
+    if (isIncrease === true) {
         newCaseNumber = previousCaseNumber + 1;
 
     }
-    else if ( previousCaseNumber <= 0) {
+    else if (previousCaseNumber <= 0) {
         alert("Negative Value is not allowed");
-        return newCaseNumber;
-      }
-    else{
+        return  previousCaseNumber;
+    }
+    else {
         newCaseNumber = previousCaseNumber - 1;
     }
     caseNumberField.value = newCaseNumber;
+
+    return newCaseNumber;
 }
 
 
@@ -42,8 +44,27 @@ function updateCaseNumber(isIncrease) {
 
 // })
 
+
+// document.getElementById('btn-cas-plus').addEventListener('click', function () {
+//     const newCaseNumber =  updateCaseNumber(true);
+//     const caseTotalPrice = newCaseNumber * 59;
+//     const caseTotalElement = document.getElementById('case-total');
+//     caseTotalElement.innerText = caseTotalPrice;
+//     });
+
+
+function updateCaseTotalPrice(newCaseNumber) {
+
+    const caseTotalPrice = newCaseNumber * 59;
+    const caseTotalElement = document.getElementById('case-total');
+    caseTotalElement.innerText = caseTotalPrice;
+
+}
+
 document.getElementById('btn-cas-plus').addEventListener('click', function () {
-updateCaseNumber(true);
+    const newCaseNumber = updateCaseNumber(true);
+    updateCaseTotalPrice(newCaseNumber);
+
 });
 
 
@@ -60,5 +81,6 @@ updateCaseNumber(true);
 // })
 
 document.getElementById('btn-case-minus').addEventListener('click', function () {
-updateCaseNumber(false);
+    const newCaseNumber = updateCaseNumber(false);
+    updateCaseTotalPrice(newCaseNumber);
 });
